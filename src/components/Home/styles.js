@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const Titulo = styled.h1`
+  font-family: Mansalva;
+  color: #35d1f5;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+`;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,7 +36,6 @@ export const BoxCard = styled.div`
   flex-direction: column;
   width: 30%;
   height: 100px;
-  background-color: #fff;
   background: linear-gradient(#f8f8f8, #fff);
   box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
   border-radius: 6px;
@@ -82,8 +88,8 @@ export const ButtonAdd = styled.div`
   box-shadow: 0 1px 5px rgba(0, 0, 0, .4);
   transition: .2s ease-out;
   position: fixed;
-  bottom: 60px;
-  right: 60px;
+  bottom: 50px;
+  right: 50px;
   :hover {
     opacity: .8;
   }

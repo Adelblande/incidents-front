@@ -3,9 +3,9 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { api } from '../../services/api';
 
-import { BoxContainer, BoxCard, BoxIcons, BoxSection, ButtonAdd } from './styles';
+import { BoxContainer, BoxCard, BoxIcons, BoxSection, ButtonAdd, Titulo } from './styles';
 
-import { FaUserEdit, FaTrashAlt, FaUserPlus } from 'react-icons/fa';
+import { FaRegEdit, FaRegTrashAlt, FaPlus } from 'react-icons/fa';
 
 export default function Home() {
   const [incidents, setIncidents] = useState();
@@ -30,42 +30,47 @@ export default function Home() {
   }
 
   function handleEdit(incident) {
-    history.push('/edit', { ...incident });
+    history.push('/edit', incident);
+  }
+
+  function handleCreate() {
+    history.push('/create');
   }
 
   return (
+    <>
+      <Titulo>Incidentes</Titulo>
+      <BoxContainer>
+        {
+          incidents && incidents.map(incident => (
+            <BoxCard key={incident.id}>
+              <header>
+                {incident.title}
+                <BoxIcons>
+                  <FaRegEdit size={20} title="Editar" onClick={() => handleEdit(incident)} />
+                  <FaRegTrashAlt size={20} title="Deletar" onClick={() => Delete(incident)} />
+                </BoxIcons>
+              </header>
 
-    <BoxContainer>
-      {
-        incidents && incidents.map(incident => (
-          <BoxCard key={incident.id}>
-            <header>
-              {incident.title}
-              <BoxIcons>
-                <FaUserEdit size={20} title="Edit" onClick={() => handleEdit(incident)} />
-                <FaTrashAlt size={20} title="Delete" onClick={() => Delete(incident)} />
-              </BoxIcons>
-            </header>
-
-            <BoxSection>
-              <Link to={{
-                pathname: `/detail`,
-                state: {
-                  incVez: incident.id,
-                }
-              }}>
-                Detalhes
+              <BoxSection>
+                <Link to={{
+                  pathname: `/detail`,
+                  state: {
+                    incVez: incident.id,
+                  }
+                }}>
+                  Detalhes
                 </Link>
 
-            </BoxSection>
+              </BoxSection>
 
-          </BoxCard>
-        ))
-      }
-      <ButtonAdd onClick={() => { }}>
-        <FaUserPlus size={30} color="#fff" />
-      </ButtonAdd>
-    </BoxContainer>
-
+            </BoxCard>
+          ))
+        }
+        <ButtonAdd onClick={() => handleCreate()}>
+          <FaPlus size={30} color="#fff" title="Adicionar Incidente" />
+        </ButtonAdd>
+      </BoxContainer>
+    </>
   )
 };
